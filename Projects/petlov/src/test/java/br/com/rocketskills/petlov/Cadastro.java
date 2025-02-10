@@ -14,7 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-class Slogan {
+class Cadastro {
 
 	@Test
 	@DisplayName("Deve poder cadastrar um ponto de doação")
