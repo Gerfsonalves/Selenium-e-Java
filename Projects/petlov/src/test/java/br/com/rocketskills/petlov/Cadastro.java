@@ -29,8 +29,7 @@ class Cadastro {
 		Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(2));
 		wait.until(d -> title.isDisplayed());
 
-
-		assertEquals("Cadastro de ponto de doação", title.getText(), "Verificando o Slogan");
+		assertEquals("Cadastro de ponto de doação", title.getText(), "Verificando título da página de cadastro");
 
 		WebElement name = driver.findElement(By.cssSelector("input[placeholder='Nome do ponto de doação']"));
         name.sendKeys("Ge point");
@@ -49,6 +48,8 @@ class Cadastro {
 
 		WebElement details = driver.findElement(By.cssSelector("input[name=addressDetails]"));
         details.sendKeys("Esquina da escola EMEF GEGE");
+
+		driver.findElement(By.xpath("//span[text()=\"Cachorros\"]/..")).click();
 
 		driver.close();
 	}
