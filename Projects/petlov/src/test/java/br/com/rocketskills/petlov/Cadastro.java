@@ -8,28 +8,55 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
+class PontoDoacao {
+	String nome;
+	String email;
+	String cep;
+	Integer numero;
+	String complemento;
+	String pets;
+
+	public PontoDoacao(String nome, String email, String cep, Integer numero, String complemento, String pets) {
+		this.nome = nome;
+		this.email = email;
+		this.cep = cep;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.pets = pets;	
+	}
+}
+
 class Cadastro {
 
 	@Test
 	@DisplayName("Deve poder cadastrar um ponto de doação")
 	void createPoint() {
 
+		// Pre-condição
+		PontoDoacao ponto = new PontoDoacao(
+			"Estação Pet",
+			"Ge@email.com",
+			"01153000",
+			43,
+			"Esquina da escola EMEF GEGE",
+			"Cachorros"
+		);
 
 		open("https://petlov.vercel.app/signup");
 		$("h1").shouldHave(text("Cadastro de ponto de doação"));
 
-		$("input[placeholder='Nome do ponto de doação']").setValue("Estação Pet");
-		$("input[name=email]").setValue("Ge@email.com");
-		$("input[name=cep]").setValue("01153000");
+		// Ação
+		$("input[placeholder='Nome do ponto de doação']").setValue(ponto.nome);
+		$("input[name=email]").setValue(ponto.email);
+		$("input[name=cep]").setValue(ponto.cep);
 		$("input[value='Buscar CEP']").click();
-		$("input[name=addressNumber]").setValue("43");
-		$("input[name=addressDetails]").setValue("Esquina da escola EMEF GEGE");
-		$(By.xpath("//span[text()=\"Cachorros\"]/..")).click();
+		$("input[name=addressNumber]").setValue(ponto.numero.toString());
+		$("input[name=addressDetails]").setValue(ponto.complemento);
+		$(By.xpath("//span[text()=\"" + ponto.pets + "\"]/..")).click();
 		$(".button-register").click();
 
+		// Resultado esperado
 		String target = "Seu ponto de doação foi adicionado com sucesso. Juntos, podemos criar um mundo onde todos os animais recebam o amor e cuidado que merecem.";
-
 		$("#success-page p").shouldHave(text(target));
-
 	}
 }
