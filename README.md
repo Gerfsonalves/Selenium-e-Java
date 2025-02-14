@@ -6,3 +6,5 @@ Projeto Petlov para o treinamento de automação de testes com Java e JUnit 5 �
 - Selenium Webdriver 4.20.0
 - JDK 21
 - JUnit 5
+
+![Logo do Projeto](/printIMG.png)
